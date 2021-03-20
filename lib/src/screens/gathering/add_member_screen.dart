@@ -10,8 +10,8 @@ import 'package:flutter_challange/src/widgets/the_text_field.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/custom_widget.dart';
 
-class AddGatheringScreen extends StatelessWidget {
-  static const String routeName = '/add-gathering';
+class AddMemberScreen extends StatelessWidget {
+  static const String routeName = '/add-member';
 
   @override
   Widget _body(BuildContext context, RegisterBloc bloc) {
@@ -26,27 +26,13 @@ class AddGatheringScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            _entryField('Nama Group',
+            _entryField('Nama / Email',
                 controller: bloc.namaController,
                 errorText: bloc.registerError.nama),
             TheSizedBox.extraSmallVertical(),
-            _entryField('Tipe Arisan',
+            _entryField('Level',
                 controller: bloc.emailController,
                 errorText: bloc.registerError.email),
-            TheSizedBox.extraSmallVertical(),
-            _entryField('Jangka Waktu',
-                controller: bloc.telpController,
-                errorText: bloc.registerError.telp),
-            TheSizedBox.extraSmallVertical(),
-            _entryField('Uang Kas',
-                controller: bloc.passwordController,
-                obscureText: true,
-                errorText: bloc.registerError.password),
-            TheSizedBox.extraSmallVertical(),
-            _entryField('Uang Konsumsi',
-                controller: bloc.confirmPasswordController,
-                obscureText: true,
-                errorText: bloc.registerError.confirmPassword),
             TheSizedBox.extraSmallVertical(),
             _submitButton(context, bloc),
           ],
@@ -74,7 +60,7 @@ class AddGatheringScreen extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 15),
         width: MediaQuery.of(context).size.width,
-        child: TheRoundedButton(title: 'Buat', onPressed: bloc.onSubmit));
+        child: TheRoundedButton(title: 'Tambah', onPressed: bloc.onSubmit));
   }
 
   @override
@@ -87,7 +73,7 @@ class AddGatheringScreen extends StatelessWidget {
       key: bloc.scaffoldKey,
       appBar: AppBar(
         title: customText(
-          'Tambah Group Arisan',
+          'Tambah Member Group',
           context: context,
           style: TextStyle(fontSize: 20),
         ),

@@ -9,7 +9,7 @@ import 'package:flutter_challange/src/constants/the_theme.dart';
 import 'package:flutter_challange/src/widgets/the_sized_box.dart';
 import './extensions.dart';
 
-Widget appBar({onTap: null, icon: Icons.animation}) {
+Widget appBar({onTap: Function, icon: Icons.animation}) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 15.0),
     height: 60.0,

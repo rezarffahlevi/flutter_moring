@@ -4,6 +4,7 @@ import 'package:flutter_challange/src/helpers/helpers.dart';
 import 'package:flutter_challange/src/providers/home/home_root_bloc.dart';
 import 'package:flutter_challange/src/screens/feed/feed_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/add_gathering_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/add_member_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/gathering_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/member_list_screen.dart';
 import 'package:flutter_challange/src/screens/notification/notification_screen.dart';
@@ -46,6 +47,11 @@ class FeedBloc extends ChangeNotifier {
     notifyListeners();
   }
 
+  DateTime _minDate = DateTime(DateTime.now().year - 3, 01, 01);
+  DateTime get minDate => _minDate;
+  DateTime _maxDate = DateTime(DateTime.now().year + 3, 12, 31);
+  DateTime get maxDate => _maxDate;
+
   FeedBloc() {
     setListCategory(['Keluarga', 'Alumni 13 Depok', 'Kantor', 'RT 05']);
     setArisanDate(DateTime(2021, 03, 01, 10, 00, 00));
@@ -69,11 +75,18 @@ class FeedBloc extends ChangeNotifier {
     Navigator.of(_context).pushNamed(AddGatheringScreen.routeName);
   }
 
+  addMemberClicked() {
+    Navigator.of(_context).pushNamed(AddMemberScreen.routeName);
+  }
+
   datePickerClicked() {
     Helpers.dismissKeyboard(_context);
     Helpers.showDatePicker(_context, 'Tanggal', (value) {
       setSelectedDate(value);
-    }, defaultDateTime: _selectedDate);
+    },
+        defaultDateTime: _selectedDate,
+        minimumYear: minDate.year,
+        maximumYear: maxDate.year);
   }
 
   DateTime currentBackPressTime;

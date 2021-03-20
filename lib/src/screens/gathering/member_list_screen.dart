@@ -50,6 +50,7 @@ class MemberListScreen extends StatelessWidget {
                 child: Icon(
                   Icons.person_add,
                 ),
+                onTap: bloc.addMemberClicked,
               ),
             ),
           ]),

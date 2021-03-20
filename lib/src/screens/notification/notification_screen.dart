@@ -55,7 +55,6 @@ class NotificationScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              appBar(),
               Positioned(
                 left: 0,
                 right: 0,
@@ -66,6 +65,7 @@ class NotificationScreen extends StatelessWidget {
                   style: TheTextStyle.contentTitle,
                 ),
               ),
+              appBar(onTap: null),
             ],
           ),
         )),

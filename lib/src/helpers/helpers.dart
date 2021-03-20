@@ -306,19 +306,20 @@ class Helpers {
 
   static void showDatePicker(
       BuildContext context, String title, Function(DateTime) onConfirm,
-      {DateTime defaultDateTime}) {
+      {DateTime defaultDateTime, minimumYear: int, maximumYear: int}) {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
       builder: (_) => datePickerWidget(context, title, (value) {
         onConfirm(value);
-      }, defaultDateTime),
+      }, defaultDateTime, minimumYear: minimumYear, maximumYear: maximumYear),
     );
   }
 
   static Widget datePickerWidget(BuildContext context, String title,
-      Function(DateTime) onConfirm, DateTime defaultDateTime) {
+      Function(DateTime) onConfirm, DateTime defaultDateTime,
+      {minimumYear: int, maximumYear: int}) {
     DateTime dateTime = defaultDateTime ?? DateTime.now();
 
     return Wrap(
@@ -353,6 +354,8 @@ class Helpers {
                     height: 200,
                     color: Colors.grey,
                     child: CupertinoDatePicker(
+                      minimumYear: minimumYear,
+                      maximumYear: maximumYear,
                       backgroundColor: TheColors.white,
                       initialDateTime: defaultDateTime ?? DateTime.now(),
                       onDateTimeChanged: (date) {

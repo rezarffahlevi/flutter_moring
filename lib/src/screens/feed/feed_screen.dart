@@ -117,7 +117,8 @@ class FeedScreen extends StatelessWidget {
               _categoryGatheringWidget(bloc),
               TheSizedBox.extraSmallVertical(),
               _categoryWidget('Anggota (16)', onTapAll: bloc.allMemberCicked),
-              _memberWidget(context, height: 60.0),
+              _memberWidget(context,
+                  onTapAdd: bloc.addMemberClicked, height: 60.0),
               TheSizedBox.extraSmallVertical(),
               _categoryWidget('Detail', showAll: false),
               _detailWidget(context),
@@ -244,7 +245,8 @@ class FeedScreen extends StatelessWidget {
     );
   }
 
-  Widget _memberWidget(BuildContext context, {type: 'all', height: 30.0}) {
+  Widget _memberWidget(BuildContext context,
+      {type: 'all', onTapAdd: Function, height: 30.0}) {
     return Container(
       margin: EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 10),
       height: height,
@@ -265,7 +267,7 @@ class FeedScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(height / 8.5),
                         border: Border.all(color: TheColors.text, width: 1)),
                   ),
-                  onTap: () {},
+                  onTap: onTapAdd,
                 )
               : Container(),
           Expanded(
@@ -488,9 +490,12 @@ class FeedScreen extends StatelessWidget {
                   weekFormat: false,
                   markedDatesMap: null,
                   height: 220.0,
+                  minSelectedDate: bloc.minDate,
+                  maxSelectedDate: bloc.maxDate,
                   // selectedDateTime: bloc.selectedDate,
                   targetDateTime: bloc.selectedDate,
                   daysHaveCircularBorder: null,
+                  customGridViewPhysics: NeverScrollableScrollPhysics(),
                 ),
               ),
             ],

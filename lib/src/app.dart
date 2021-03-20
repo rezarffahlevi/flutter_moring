@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_challange/src/screens/gathering/add_gathering_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/add_member_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_challange/src/helpers/helpers.dart';
 import 'package:flutter_challange/src/providers/auth/login_bloc.dart';
@@ -148,6 +149,15 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             return ChangeNotifierProvider<RegisterBloc>.value(
               value: RegisterBloc(),
               child: AddGatheringScreen(),
+            );
+          },
+        );
+      case AddMemberScreen.routeName:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ChangeNotifierProvider<RegisterBloc>.value(
+              value: RegisterBloc(),
+              child: AddMemberScreen(),
             );
           },
         );

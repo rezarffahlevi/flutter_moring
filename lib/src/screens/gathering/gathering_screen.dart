@@ -54,7 +54,6 @@ class GatheringScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              appBar(onTap: () {}, icon: Icons.group_add),
               Positioned(
                 left: 0,
                 right: 0,
@@ -65,6 +64,7 @@ class GatheringScreen extends StatelessWidget {
                   style: TheTextStyle.contentTitle,
                 ),
               ),
+              appBar(onTap: bloc.addGatheringClicked, icon: Icons.group_add),
             ],
           ),
         )),
@@ -86,7 +86,7 @@ class GatheringScreen extends StatelessWidget {
 
   Widget _arisanWidget(BuildContext context, GatheringBloc bloc) {
     return InkWell(
-      onTap: bloc.arisanClicked,
+      onTap: bloc.gatheringClicked,
       child: Container(
           // margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
