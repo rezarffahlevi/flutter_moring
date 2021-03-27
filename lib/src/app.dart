@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_challange/src/providers/gathering/paid_bloc.dart';
+import 'package:flutter_challange/src/providers/gathering/pull_bloc.dart';
 import 'package:flutter_challange/src/screens/gathering/add_gathering_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/add_member_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/add_paid_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/paid_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/pull_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/winner_setting_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_challange/src/helpers/helpers.dart';
 import 'package:flutter_challange/src/providers/auth/login_bloc.dart';
@@ -170,12 +176,48 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             );
           },
         );
+      case PaidScreen.routeName:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ChangeNotifierProvider<PaidBloc>.value(
+              value: PaidBloc(),
+              child: PaidScreen(),
+            );
+          },
+        );
+      case AddPaidScreen.routeName:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ChangeNotifierProvider<RegisterBloc>.value(
+              value: RegisterBloc(),
+              child: AddPaidScreen(),
+            );
+          },
+        );
+      case PullScreen.routeName:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ChangeNotifierProvider<PullBloc>.value(
+              value: PullBloc(),
+              child: PullScreen(),
+            );
+          },
+        );
       case ShakeScreen.routeName:
         return MaterialPageRoute(
           builder: (context) {
             return ChangeNotifierProvider<ShakeBloc>.value(
               value: ShakeBloc(),
               child: ShakeScreen(),
+            );
+          },
+        );
+      case WinnerSettinScreen.routeName:
+        return MaterialPageRoute(
+          builder: (context) {
+            return ChangeNotifierProvider<RegisterBloc>.value(
+              value: RegisterBloc(),
+              child: WinnerSettinScreen(),
             );
           },
         );

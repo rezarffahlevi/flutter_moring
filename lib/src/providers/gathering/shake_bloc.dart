@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_challange/src/helpers/helpers.dart';
 import 'package:flutter_challange/src/screens/feed/feed_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/winner_setting_screen.dart';
 import 'package:flutter_challange/src/screens/user/profile_screen.dart';
 import 'package:flutter_challange/src/widgets/the_loader.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +38,15 @@ class ShakeBloc extends ChangeNotifier {
       int randomNumber = random.nextInt(listNama.length);
       // print(listNama[randomNumber]);
       setNama(listNama[randomNumber]);
+      onWinner();
     });
     Timer(const Duration(seconds: 5), () {
       interval.cancel();
     });
+  }
+
+  onWinner() {
+    Navigator.of(_context).pushNamed(WinnerSettinScreen.routeName);
   }
 
   didMount(context) {

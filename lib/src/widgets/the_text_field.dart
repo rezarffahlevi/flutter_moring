@@ -86,6 +86,7 @@ class TheTextFieldRadius extends StatelessWidget {
   final Function(bool) onTextFieldTap;
   final TextInputAction textInputAction;
   final bool enabled;
+  final Function onClicked;
 
   TheTextFieldRadius({
     this.controller,
@@ -104,61 +105,78 @@ class TheTextFieldRadius extends StatelessWidget {
     this.onTextFieldTap,
     this.textInputAction,
     this.enabled = true,
+    this.onClicked,
   });
 
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Text(
-          labelText,
-          style: TextStyle(
-            color: TheColors.black,
-            fontSize: 14,
-            fontWeight: TheFontWeight.semiBold,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            labelText,
+            style: TextStyle(
+              color: TheColors.black,
+              fontSize: 14,
+              fontWeight: TheFontWeight.semiBold,
+            ),
           ),
-        ),
-        TheSizedBox.ultraSmallVertical(),
-        TextField(
-          key: key,
-          maxLines: isArea ? 5 : 1,
-          enabled: enabled,
-          enableSuggestions: false,
-          keyboardType: keyboardType,
-          controller: controller,
-          onChanged: onChanged,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(
-              left: 10,
-              right: 10,
-              top: 10,
-              bottom: 10,
-            ),
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: Colors.grey)),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-            filled: true,
-            hintStyle: TextStyle(color: Colors.grey),
-            hintText: hintText,
-            fillColor: Colors.white,
-            errorText: (errorText ?? '') != '' ? errorText : null,
-            errorStyle: TextStyle(color: Colors.red),
+          TheSizedBox.ultraSmallVertical(),
+          GestureDetector(
+            onTap: () {
+              if (onClicked != null) {
+                onClicked();
+              }
+            },
+            child: Container(
+              color: Colors.transparent,
+              child: Container(
+                child: Focus(
+                  onFocusChange: (focus) {
+                    onTextFieldTap(focus);
+                  },
+                  child: TextField(
+                    key: key,
+                    maxLines: isArea ? 5 : 1,
+                    enabled: enabled,
+                    enableSuggestions: false,
+                    keyboardType: keyboardType,
+                    controller: controller,
+                    onChanged: onChanged,
+                    obscureText: obscureText,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                        left: 10,
+                        right: 10,
+                        top: 10,
+                        bottom: 10,
+                      ),
+                      suffixIcon: suffixIcon,
+                      prefixIcon: prefixIcon,
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: BorderSide(color: Colors.grey)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
+                      ),
+                      filled: true,
+                      hintStyle: TextStyle(color: Colors.grey),
+                      hintText: hintText,
+                      fillColor: Colors.white,
+                      errorText: (errorText ?? '') != '' ? errorText : null,
+                      errorStyle: TextStyle(color: Colors.red),
 
 //                counter: Container(),
+                    ),
+                    inputFormatters: inputFormatters,
+                    maxLength: maxLength,
+                    textInputAction: textInputAction,
+                  ),
+                ),
+              ),
+            ),
           ),
-          inputFormatters: inputFormatters,
-          maxLength: maxLength,
-          textInputAction: textInputAction,
-        ),
-      ],
-    );
+        ]);
   }
 }

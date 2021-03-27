@@ -111,11 +111,11 @@ class DetailGatheringScreen extends StatelessWidget {
                 _itemWidget(
                     value: 'Yaya Tech',
                     key: 'Pemenang Arisan Ke-2',
-                    onTap: bloc.memberClicked),
+                    onTap: bloc.paidClicked),
                 _itemWidget(
                     value: 'Penarikan Ke-2 dari 16',
                     key: '31 Maret 2021',
-                    onTap: bloc.memberClicked),
+                    onTap: bloc.listPullClicked),
                 TheSizedBox.smallVertical(),
                 Text(
                   "Detail Group",
@@ -127,15 +127,29 @@ class DetailGatheringScreen extends StatelessWidget {
                 _itemWidget(
                     value: '20', key: 'Anggota', onTap: bloc.memberClicked),
                 _itemWidget(
-                    value: 'Rp. 20.000 / bulan', key: 'Kas', onTap: () {}),
+                  value: 'Rp. 20.000 / bulan',
+                  key: 'Kas',
+                ),
                 _itemWidget(
-                    value: 'Rp. 5.000 / bulan', key: 'Konsumsi', onTap: () {}),
+                  value: 'Rp. 5.000 / bulan',
+                  key: 'Konsumsi',
+                ),
                 _itemWidget(
-                    value: 'Rp. 20.000.000', key: 'Saldo Kas', onTap: () {}),
+                  value: 'Rp. 20.000.000',
+                  key: 'Saldo Kas',
+                ),
                 _itemWidget(
-                    value: 'Perbulan', key: 'Jangka Waktu', onTap: () {}),
-                _itemWidget(value: 'Pertama', key: 'Putaran', onTap: () {}),
-                _itemWidget(value: 'Bebas', key: 'Tipe Arisan', onTap: () {}),
+                  value: 'Perbulan',
+                  key: 'Jangka Waktu',
+                ),
+                _itemWidget(
+                  value: 'Pertama',
+                  key: 'Putaran',
+                ),
+                _itemWidget(
+                  value: 'Bebas',
+                  key: 'Tipe Arisan',
+                ),
                 TheSizedBox.smallVertical(),
                 Text(
                   "Settings",
@@ -145,9 +159,15 @@ class DetailGatheringScreen extends StatelessWidget {
                       fontSize: 16),
                 ),
                 _menuWidget(
-                    icon: Icons.delete,
-                    text: 'Hapus Group',
-                    onTap: bloc.memberClicked),
+                  icon: Icons.group_rounded,
+                  text: 'Ubah Group',
+                  onTap: bloc.editClicked,
+                ),
+                _menuWidget(
+                  icon: Icons.delete,
+                  text: 'Hapus Group',
+                  onTap: bloc.editClicked,
+                ),
               ],
             ),
           ),
@@ -189,11 +209,13 @@ class DetailGatheringScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Icon(
-              Icons.keyboard_arrow_right,
-              color: TheColors.text,
-              size: 30,
-            ),
+            onTap == null
+                ? Container()
+                : Icon(
+                    Icons.keyboard_arrow_right,
+                    color: TheColors.text,
+                    size: 30,
+                  ),
           ],
         ),
       ),

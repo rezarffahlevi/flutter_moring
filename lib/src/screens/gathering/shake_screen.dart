@@ -68,6 +68,10 @@ class ShakeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              InkWell(
+                child: Text('lanjut'),
+                onTap: bloc.onWinner,
+              ),
               Container(
                 width: dimension.width - 40,
                 height: 140,
@@ -81,7 +85,7 @@ class ShakeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      bloc.nama ?? 'GOYANGIN HP-NYA NGABS',
+                      bloc.nama ?? 'GOYANGIN HP NYA',
                       style: TheTextStyle.h1.bold,
                     ),
                     bloc.nama == null

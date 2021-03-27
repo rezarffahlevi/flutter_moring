@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_challange/src/helpers/helpers.dart';
 import 'package:flutter_challange/src/screens/feed/feed_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/add_gathering_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/detail_gathering_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/member_list_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/paid_screen.dart';
+import 'package:flutter_challange/src/screens/gathering/pull_screen.dart';
 import 'package:flutter_challange/src/screens/gathering/shake_screen.dart';
 import 'package:flutter_challange/src/widgets/the_loader.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +32,18 @@ class DetailGatheringBloc extends ChangeNotifier {
 
   memberClicked() {
     Navigator.of(_context).pushNamed(MemberListScreen.routeName);
+  }
+
+  editClicked() {
+    Navigator.of(_context).pushNamed(AddGatheringScreen.routeName);
+  }
+
+  paidClicked() {
+    Navigator.of(_context).pushNamed(PaidScreen.routeName);
+  }
+
+  listPullClicked() {
+    Navigator.of(_context).pushNamed(PullScreen.routeName);
   }
 
   shakeClicked() {

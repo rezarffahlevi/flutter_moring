@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_challange/src/constants/the_colors.dart';
+import 'package:flutter_challange/src/constants/the_font_weight.dart';
 import 'package:flutter_challange/src/helpers/helpers.dart';
 import 'package:flutter_challange/src/helpers/validators.dart';
 import 'package:flutter_challange/src/providers/auth/register_bloc.dart';
@@ -23,16 +24,46 @@ class AddMemberScreen extends StatelessWidget {
       child: Form(
         key: bloc.formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _entryField('Nama / Email',
                 controller: bloc.namaController,
                 errorText: bloc.registerError.nama),
             TheSizedBox.extraSmallVertical(),
-            _entryField('Level',
-                controller: bloc.emailController,
-                errorText: bloc.registerError.email),
+            Text(
+              'Jangka Waktu',
+              style: TextStyle(
+                color: TheColors.black,
+                fontSize: 14,
+                fontWeight: TheFontWeight.semiBold,
+              ),
+            ),
+            DropdownButton<String>(
+              isExpanded: true,
+              value: null,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              iconSize: 24,
+              elevation: 16,
+              style: const TextStyle(color: Colors.black),
+              hint: Text('Level'),
+              underline: Container(
+                height: 2,
+                color: Colors.grey,
+              ),
+              onChanged: (String newValue) {
+                // setState(() {
+                //   dropdownValue = newValue!;
+                // });
+              },
+              items: <String>['Member', 'Admin']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
             TheSizedBox.extraSmallVertical(),
             _submitButton(context, bloc),
           ],

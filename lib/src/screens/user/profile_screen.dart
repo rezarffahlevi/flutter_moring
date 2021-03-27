@@ -96,6 +96,8 @@ class ProfileScreen extends StatelessWidget {
                       fontSize: 16),
                 ),
                 _menuWidget(
+                    icon: Icons.security, text: 'Ubah Password', onTap: () {}),
+                _menuWidget(
                     icon: Icons.logout, text: 'Logout', onTap: bloc.logout),
               ],
             ),
