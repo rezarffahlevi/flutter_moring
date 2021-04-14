@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_challange/src/constants/the_colors.dart';
 import 'package:flutter_challange/src/constants/the_font_weight.dart';
 import 'package:flutter_challange/src/helpers/helpers.dart';
-import 'package:flutter_challange/src/helpers/validators.dart';
-import 'package:flutter_challange/src/providers/auth/register_bloc.dart';
+import 'package:flutter_challange/src/providers/gathering/add_gathering_bloc.dart';
 import 'package:flutter_challange/src/widgets/the_rounded_button.dart';
 import 'package:flutter_challange/src/widgets/the_sized_box.dart';
 import 'package:flutter_challange/src/widgets/the_text_field.dart';
@@ -15,7 +15,7 @@ class AddGatheringScreen extends StatelessWidget {
   static const String routeName = '/add-gathering';
 
   @override
-  Widget _body(BuildContext context, RegisterBloc bloc) {
+  Widget _body(BuildContext context, AddGatheringBloc bloc) {
     final dimension = MediaQuery.of(context).size;
     return Container(
       // height: dimension.height - 88,
@@ -27,9 +27,10 @@ class AddGatheringScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _entryField('Nama Group',
-                controller: bloc.namaController,
-                errorText: bloc.registerError.nama),
+            TheTextFieldRadius(
+              labelText: 'Nama Group',
+              controller: bloc.nameController,
+            ),
             TheSizedBox.extraSmallVertical(),
             Text(
               'Tipe Arisan',
@@ -41,7 +42,7 @@ class AddGatheringScreen extends StatelessWidget {
             ),
             DropdownButton<String>(
               isExpanded: true,
-              value: null,
+              value: bloc.groupModel.type,
               icon: const Icon(Icons.keyboard_arrow_down),
               iconSize: 24,
               elevation: 16,
@@ -52,9 +53,7 @@ class AddGatheringScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
               onChanged: (String newValue) {
-                // setState(() {
-                //   dropdownValue = newValue!;
-                // });
+                bloc.setType(newValue);
               },
               items: <String>['Bebas', 'Konstan']
                   .map<DropdownMenuItem<String>>((String value) {
@@ -75,7 +74,9 @@ class AddGatheringScreen extends StatelessWidget {
             ),
             DropdownButton<String>(
               isExpanded: true,
-              value: null,
+              value: bloc.groupModel.rangeTime == null
+                  ? null
+                  : (bloc.groupModel.rangeTime == 7 ? 'Perminggu' : 'Perbulan'),
               icon: const Icon(Icons.keyboard_arrow_down),
               iconSize: 24,
               elevation: 16,
@@ -86,9 +87,7 @@ class AddGatheringScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
               onChanged: (String newValue) {
-                // setState(() {
-                //   dropdownValue = newValue!;
-                // });
+                bloc.setRangeTime(newValue == 'Perminggu' ? 7 : 30);
               },
               items: <String>['Perbulan', 'Perminggu']
                   .map<DropdownMenuItem<String>>((String value) {
@@ -99,17 +98,28 @@ class AddGatheringScreen extends StatelessWidget {
               }).toList(),
             ),
             TheSizedBox.extraSmallVertical(),
-            _entryField('Putaran Ke',
-                controller: bloc.namaController,
-                errorText: bloc.registerError.nama),
+            // _entryField('Putaran Ke',
+            //     controller: bloc.namaController,
+            //     errorText: bloc.registerError.nama),
             TheSizedBox.extraSmallVertical(),
-            _entryField('Uang Kas',
-                controller: bloc.namaController,
-                errorText: bloc.registerError.nama),
+
+            TheTextFieldRadius(
+              labelText: 'Uang Kas',
+              controller: bloc.cashController,
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ], // Only numbers can be entered
+            ),
             TheSizedBox.extraSmallVertical(),
-            _entryField('Uang Konsumsi',
-                controller: bloc.namaController,
-                errorText: bloc.registerError.nama),
+            TheTextFieldRadius(
+              labelText: 'Uang Konsumsi',
+              controller: bloc.consumtionController,
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ], // Only numbers can be entered
+            ),
             TheSizedBox.extraSmallVertical(),
             _submitButton(context, bloc),
           ],
@@ -123,6 +133,7 @@ class AddGatheringScreen extends StatelessWidget {
     TextEditingController controller,
     String errorText,
     bool obscureText = false,
+    keyboardType = TextInputType.text,
   }) {
     return TheTextFieldRadius(
       labelText: labelText,
@@ -130,10 +141,14 @@ class AddGatheringScreen extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       errorText: errorText,
+      keyboardType: keyboardType,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly
+      ], // Only numbers can be entered
     );
   }
 
-  Widget _submitButton(BuildContext context, RegisterBloc bloc) {
+  Widget _submitButton(BuildContext context, AddGatheringBloc bloc) {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 15),
         width: MediaQuery.of(context).size.width,
@@ -142,7 +157,7 @@ class AddGatheringScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<RegisterBloc>(context);
+    final bloc = Provider.of<AddGatheringBloc>(context);
     bloc.didMount(context);
 
     return Scaffold(

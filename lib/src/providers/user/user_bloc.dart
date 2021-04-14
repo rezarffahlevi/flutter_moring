@@ -29,7 +29,7 @@ class UserBloc extends ChangeNotifier {
   }
 
   UserBloc() {
-    fecthData();
+    // fecthData();
     // getToken();
   }
 

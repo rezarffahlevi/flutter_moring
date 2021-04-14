@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_challange/src/providers/gathering/add_gathering_bloc.dart';
 import 'package:flutter_challange/src/providers/gathering/paid_bloc.dart';
 import 'package:flutter_challange/src/providers/gathering/pull_bloc.dart';
 import 'package:flutter_challange/src/screens/gathering/add_gathering_screen.dart';
@@ -64,7 +65,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             Brightness.light // Dark == white status bar -- for IOS.
         ));
     return MaterialApp(
-      title: 'Flutter Challange',
+      title: 'Mo-Ring',
       theme: ThemeData(fontFamily: 'Nunito', brightness: Brightness.light),
       onGenerateRoute: routes,
       navigatorKey: Helpers.navigatorKey,
@@ -152,8 +153,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       case AddGatheringScreen.routeName:
         return MaterialPageRoute(
           builder: (context) {
-            return ChangeNotifierProvider<RegisterBloc>.value(
-              value: RegisterBloc(),
+            return ChangeNotifierProvider<AddGatheringBloc>.value(
+              value: AddGatheringBloc(),
               child: AddGatheringScreen(),
             );
           },

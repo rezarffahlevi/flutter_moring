@@ -66,6 +66,7 @@ class LoginBloc extends ChangeNotifier {
         loader.hideLoader();
         customSnackBar(scaffoldKey, _auth.message,
             backgroundColor: Colors.redAccent);
+        Navigator.pushReplacementNamed(_context, HomeRootScreen.routeName);
       }
     } catch (e) {
       loader.hideLoader();

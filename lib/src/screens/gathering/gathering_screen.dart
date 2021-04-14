@@ -81,6 +81,20 @@ class GatheringScreen extends StatelessWidget {
         itemCount: 13,
         itemBuilder: (context, index) {
           return _arisanWidget(context, bloc);
+          return Container(
+            decoration: BoxDecoration(
+              color: TheColors.white,
+              border: Border(
+                bottom: BorderSide(color: TheColors.greyPlaceHolder, width: 1),
+              ),
+            ),
+            child: ListTile(
+              title: Text("Arisan Keluarga"),
+              subtitle: Text(
+                "Admin : Dustin Ilham",
+              ),
+            ),
+          );
         });
   }
 
@@ -88,12 +102,13 @@ class GatheringScreen extends StatelessWidget {
     return InkWell(
       onTap: bloc.gatheringClicked,
       child: Container(
-          // margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
           decoration: BoxDecoration(
-              color: TheColors.white,
-              borderRadius: BorderRadius.circular(0),
-              border: Border.all(color: TheColors.greyPlaceHolder, width: 1)),
+            color: TheColors.white,
+            border: Border(
+              bottom: BorderSide(color: TheColors.greyPlaceHolder, width: 1),
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

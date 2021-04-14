@@ -132,7 +132,9 @@ class TheTextFieldRadius extends StatelessWidget {
               child: Container(
                 child: Focus(
                   onFocusChange: (focus) {
-                    onTextFieldTap(focus);
+                    return onTextFieldTap == null
+                        ? null
+                        : onTextFieldTap(focus);
                   },
                   child: TextField(
                     key: key,
